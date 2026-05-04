@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ProductForm from "./components/productForm";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -94,57 +95,82 @@ function App() {
     setEditIndex(index);
   };
 
+  // return (
+  //   <div style={{ padding: "20px" }}>
+  //     <h1>Product App</h1>
+
+  //     <input
+  //       name="name"
+  //       placeholder="Product name"
+  //       value={form.name}
+  //       onChange={handleChange}
+  //     />
+
+  //     <input
+  //       type="number"
+  //       name="price"
+  //       placeholder="Price"
+  //       value={form.price}
+  //       onChange={handleChange}
+  //     />
+
+  //     <input
+  //       type="number"
+  //       name="stock"
+  //       placeholder="Stock"
+  //       value={form.stock}
+  //       onChange={handleChange}
+  //     />
+
+  //     <br /><br />
+
+  //     <button onClick={saveProduct}>
+  //       {editIndex !== null ? "Update" : "Add"}
+  //     </button>
+
+  //     <hr />
+
+  //     {products.length === 0 ? (
+  //       <p>No products yet</p>
+  //     ) : (
+  //       products.map((p, index) => (
+  //         <div key={p.id}>
+  //           <h3>{p.name}</h3>
+  //           <p>Price: {p.price}</p>
+  //           <p>Stock: {p.stock}</p>
+
+  //           <button onClick={() => editProduct(index)}>Edit</button>
+  //           <button onClick={() => deleteProduct(index)}>Delete</button>
+  //         </div>
+  //       ))
+  //     )}
+  //   </div>
+  // );
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Product App</h1>
+  <div style={{ padding: "20px" }}>
+    <h1>Product App</h1>
 
-      <input
-        name="name"
-        placeholder="Product name"
-        value={form.name}
-        onChange={handleChange}
-      />
+    {/* ✅ USE YOUR NEW FORM */}
+    <ProductForm fetchProducts={fetchProducts} />
 
-      <input
-        type="number"
-        name="price"
-        placeholder="Price"
-        value={form.price}
-        onChange={handleChange}
-      />
+    <hr />
 
-      <input
-        type="number"
-        name="stock"
-        placeholder="Stock"
-        value={form.stock}
-        onChange={handleChange}
-      />
+    {products.length === 0 ? (
+      <p>No products yet</p>
+    ) : (
+      products.map((p, index) => (
+        <div key={p.id}>
+          <h3>{p.name}</h3>
+          <p>Price: {p.price}</p>
+          <p>Stock: {p.stock}</p>
 
-      <br /><br />
-
-      <button onClick={saveProduct}>
-        {editIndex !== null ? "Update" : "Add"}
-      </button>
-
-      <hr />
-
-      {products.length === 0 ? (
-        <p>No products yet</p>
-      ) : (
-        products.map((p, index) => (
-          <div key={p.id}>
-            <h3>{p.name}</h3>
-            <p>Price: {p.price}</p>
-            <p>Stock: {p.stock}</p>
-
-            <button onClick={() => editProduct(index)}>Edit</button>
-            <button onClick={() => deleteProduct(index)}>Delete</button>
-          </div>
-        ))
-      )}
-    </div>
-  );
+          <button onClick={() => editProduct(index)}>Edit</button>
+          <button onClick={() => deleteProduct(index)}>Delete</button>
+        </div>
+      ))
+    )}
+  </div>
+);
 }
 
 export default App;
