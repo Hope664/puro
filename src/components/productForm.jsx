@@ -5,9 +5,22 @@ function ProductForm({ fetchProducts }){
     const [FormData, setForm] = useState({
         name:"",
         price:"",
-        stock:""
+        stock:"",
+        image: null,
+        preview:""
     });
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+
+        if(file){
+            setForm({
+                ...FormData,
+                image: file,
+                preview: URL.createObjectURL(file)
+            });
+        }
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -41,6 +54,18 @@ function ProductForm({ fetchProducts }){
                 value={FormData.stock}
                 onChange={(e) => setForm({...FormData, stock: e.target.value})}
             />
+            <input type="file" accept="image/*" onChange={handleImageChange}/>
+            {FormData.preview &&(
+                <img
+                src={FormData.preview}
+                alt= "preview"
+                style={{
+                    width:"150px",
+                    marginTop:"10px",
+                    borderRadius: "10px"
+                }}
+/>
+            )}
             <button type="submit">Add Product</button>
         </form>
     );
